@@ -74,7 +74,13 @@ bool question(const short& difficulty, const short& level, const short& health, 
 	else b = rand() % 100;
 
 	sum = operation(last_answer, b, difficulty);
-	std::cin >> answer;
+	// exception input
+	while (!(std::cin >> answer) || (std::cin.peek() != '\n')) {
+		std::cin.clear();
+		while (std::cin.get() != '\n');
+		std::cout << "Error!" << "\n";
+	}
+	//
 	if (sum != answer) {
 		std::cout << "Nope! " << sum << "\n";
 		last_answer = 0;
